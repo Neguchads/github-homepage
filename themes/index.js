@@ -1,4 +1,20 @@
 export const themes = {
+  neguchads: {
+    title_color: "EAF4FF",
+    icon_color: "00B3FF",
+    text_color: "C8D7E6",
+    bg_color: "0B111B",
+    border_color: "34516A",
+    ring_color: "63DAFF",
+  },
+  neguchads_light: {
+    title_color: "152B40",
+    icon_color: "007EAF",
+    text_color: "263B50",
+    bg_color: "FFFFFF",
+    border_color: "CAD9E5",
+    ring_color: "006E9F",
+  },
   default: {
     title_color: "2f80ed",
     icon_color: "4c71f2",
