@@ -83,6 +83,8 @@ This fork adds two corporate themes — `neguchads` (graphite and cyan) and `neg
 
 Explore the public portfolio through a procedural interactive network inspired by [Abyssal Garden](https://github.com/Noniv/abyssal-garden). No dependencies, external assets or API tokens. English and Portuguese, camera controls, reduced motion and detail settings.
 
+**Knowledge layer:** [NAVI Graphify](https://github.com/Neguchads/navi-graphify) supplies the reviewed public catalog and optional code-only structural summaries. The renderer generates the offline experience and static profile SVGs from that contract.
+
 [Download the standalone HTML](https://raw.githubusercontent.com/Neguchads/github-homepage/main/docs/explore/index.html) · [Usage and deployment](docs/explore/README.md)
 
 
