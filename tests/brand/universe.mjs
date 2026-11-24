@@ -16,6 +16,6 @@ test("public universe bundle and SVG",()=>{
   execFileSync(process.execPath,["--check","docs/universe/universe.js"]);
   execFileSync(process.execPath,["scripts/build-universe.mjs",s,a,p,o]);
   const html=fs.readFileSync(path.join(o,"index.html"),"utf8"),svg=fs.readFileSync(path.join(o,"universe.en.svg"),"utf8");
-  assert.ok(html.includes("\\u003cscript>"));assert.ok(!html.includes("<script>test</script>"));assert.ok(svg.includes("&lt;script&gt;"));assert.ok(fs.existsSync(path.join(o,"snapshot.json")));
+  assert.ok(html.includes('<html lang="en">'));assert.ok(html.includes('id="lang-pt"'));assert.ok(html.includes('data-pt="Inteligência de engenharia interconectada"'));assert.ok(html.includes("navi-universe-language"));assert.ok(html.includes("\\u003cscript>"));assert.ok(!html.includes("<script>test</script>"));assert.ok(svg.includes("&lt;script&gt;"));assert.ok(fs.existsSync(path.join(o,"snapshot.json")));
  }finally{fs.rmSync(root,{recursive:true,force:true});}
 });
