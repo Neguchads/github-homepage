@@ -148,10 +148,10 @@ describe("Test renderStatsCard", () => {
     });
     expect(document.querySelector("svg")).toHaveAttribute(
       "width",
-      "305.81250000000006",
+      "287",
     );
 
-    // Test minimum card width with rank and icons.
+    // Test minimum card width without rank and with icons.
     document.body.innerHTML = renderStatsCard(stats, {
       card_width: 1,
       hide_rank: true,
@@ -159,10 +159,10 @@ describe("Test renderStatsCard", () => {
     });
     expect(document.querySelector("svg")).toHaveAttribute(
       "width",
-      "322.81250000000006",
+      "304",
     );
 
-    // Test minimum card width with icons but without rank.
+    // Test minimum card width with rank and icons.
     document.body.innerHTML = renderStatsCard(stats, {
       card_width: 1,
       hide_rank: false,
@@ -170,7 +170,7 @@ describe("Test renderStatsCard", () => {
     });
     expect(document.querySelector("svg")).toHaveAttribute("width", "437");
 
-    // Test minimum card width without icons or rank.
+    // Test minimum card width with rank but without icons.
     document.body.innerHTML = renderStatsCard(stats, {
       card_width: 1,
       hide_rank: false,
@@ -359,7 +359,7 @@ describe("Test renderStatsCard", () => {
 
     expect(
       document.body.getElementsByTagName("svg")[0].getAttribute("width"),
-    ).toBe("305.81250000000006");
+    ).toBe("287");
   });
 
   it("should auto resize if hide_rank is true & custom_title is set", () => {
@@ -371,6 +371,18 @@ describe("Test renderStatsCard", () => {
     expect(
       document.body.getElementsByTagName("svg")[0].getAttribute("width"),
     ).toBe("287");
+  });
+
+  it("should expand for a long custom title when rank is hidden", () => {
+    document.body.innerHTML = renderStatsCard(stats, {
+      hide_rank: true,
+      card_width: 1,
+      custom_title: "A deliberately long GitHub statistics card title",
+    });
+
+    expect(
+      Number(document.body.querySelector("svg").getAttribute("width")),
+    ).toBeGreaterThan(287);
   });
 
   it("should render translations", () => {
@@ -387,7 +399,7 @@ describe("Test renderStatsCard", () => {
       document.querySelector(
         'g[transform="translate(0, 25)"]>.stagger>.stat.bold',
       ).textContent,
-    ).toMatchInlineSnapshot(`"累计提交数（commit） (2023):"`);
+    ).toBe(`累计提交数（commit） (${new Date().getFullYear()}):`);
     expect(
       document.querySelector(
         'g[transform="translate(0, 50)"]>.stagger>.stat.bold',
