@@ -6,6 +6,7 @@ on:
       - 'themes/**'
       - 'tests/brand/**'
       - 'docs/explore/**'
+      - 'scripts/build-portfolio.mjs'
       - '.github/workflows/neguchads-theme.yml'
   push:
     branches: [main]
@@ -13,6 +14,7 @@ on:
       - 'themes/**'
       - 'tests/brand/**'
       - 'docs/explore/**'
+      - 'scripts/build-portfolio.mjs'
       - '.github/workflows/neguchads-theme.yml'
   workflow_dispatch:
 
@@ -28,7 +30,9 @@ jobs:
         with:
           persist-credentials: false
       - name: Test theme registration and contrast
-        run: node --test tests/brand/*.mjs
+        run: |
+          node scripts/build-portfolio.mjs --check
+          node --test tests/brand/*.mjs
   rendering:
     runs-on: ubuntu-24.04
     timeout-minutes: 12
