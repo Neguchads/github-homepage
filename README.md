@@ -69,6 +69,16 @@
   <p align="center">Love the project? Please consider <a href="https://www.paypal.me/ishandutta2007">donating</a> to help it improve!</p>
 </p>
 
+## Neguchads edition
+
+<p align="center">
+  <img src="docs/neguchads/banner.svg" alt="Neguchads — Explore. Build. Verify." width="100%" />
+</p>
+
+This fork adds two corporate themes — `neguchads` (graphite and cyan) and `neguchads_light` (white and navy) — to the existing card engine. The original project, themes and MIT license are preserved.
+
+[Brand documentation, examples and safe deployment guidance](docs/neguchads/README.md) · [Neguchads profile](https://github.com/Neguchads)
+
 # Features <!-- omit in toc -->
 
 - [GitHub Stats Card](#github-stats-card)
