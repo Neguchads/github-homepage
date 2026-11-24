@@ -13,6 +13,13 @@ const relationLabel=k=>({membership:t("Membership","Pertencimento"),integration:
 const labels={public_repositories:t("Public repositories","Repositórios públicos"),active_originals:t("Active originals","Originais ativos"),stars:"Stars",forks:t("Received forks","Forks recebidos"),open_items:t("Open items","Itens abertos"),followers:t("Followers","Seguidores")};
 for(const [k,v] of Object.entries(d.totals)){const card=el("div",null,$("totals"));card.className="panel metric";el("strong",String(v),card);el("span",labels[k],card);}
 $("date").textContent=t("Public snapshot • ","Snapshot público • ")+d.date+" UTC";
+const cs=d.core_status, statusPanel=$("core-status");
+if(cs&&cs.scope==="public-core-ci"&&cs.repository==="Neguchads/navi-core"&&/^[a-f0-9]{40}$/.test(cs.commit)&&Number.isSafeInteger(cs.run_id)&&cs.run_id>0&&["success","failure","cancelled","skipped","timed_out","action_required","neutral","stale","in_progress","queued","unknown"].includes(cs.state)){
+ const states={success:t("Passed","Aprovado"),failure:t("Failed","Falhou"),cancelled:t("Cancelled","Cancelado"),skipped:t("Skipped","Ignorado"),timed_out:t("Timed out","Tempo excedido"),action_required:t("Action required","Ação necessária"),neutral:t("Neutral","Neutro"),stale:t("Stale","Desatualizado"),in_progress:t("In progress","Em execução"),queued:t("Queued","Na fila"),unknown:t("Unknown","Desconhecido")};
+ el("p",t("Latest observed main-branch CI: ","Última CI observada na main: ")+states[cs.state],statusPanel);
+ const a=el("a","GitHub Actions · "+cs.commit.slice(0,10),statusPanel);a.href="https://github.com/Neguchads/navi-core/actions/runs/"+cs.run_id;
+}else el("p",t("Core CI status unavailable.","Estado da CI do Core indisponível."),statusPanel);
+el("p",t("CI status is not agentic validation or production certification.","Estado da CI não equivale à validação agêntica ou homologação de produção."),statusPanel);
 const nodes=[],edges=[],map=new Map(),projects=new Map();
 function node(id,label,color,pos,kind,repo){const n={id,label,color,pos,kind,repo};nodes.push(n);map.set(id,n);return n;}
 function edge(a,b,kind){if(map.has(a)&&map.has(b))edges.push({a,b,kind});}
