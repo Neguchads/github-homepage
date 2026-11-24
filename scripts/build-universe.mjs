@@ -8,6 +8,10 @@ const read=p=>fs.readFileSync(p,"utf8"), d=JSON.parse(read(snapshot));
 if(d.schema_version!==1||d.scope!=="public-only"||d.owner!=="Neguchads"||!Array.isArray(d.sectors)||d.sectors.length!==4||!/^\d{4}-\d{2}-\d{2}$/.test(d.date))throw Error("Invalid snapshot");
 const names=new Set(d.sectors.flatMap(s=>s.projects.map(p=>p.slug)));
 if([...names].some(s=>! /^[A-Za-z0-9_.-]{1,100}$/.test(s))||d.featured.some(s=>!names.has(s))||Object.values(d.totals).some(v=>!Number.isSafeInteger(v)||v<0))throw Error("Invalid public data");
+if(d.core_status!==undefined&&d.core_status!==null){
+ const c=d.core_status;
+ if(!c||typeof c!=="object"||Object.keys(c).sort().join(",")!=="commit,repository,run_id,scope,state"||c.scope!=="public-core-ci"||c.repository!=="Neguchads/navi-core"||! /^[a-f0-9]{40}$/.test(c.commit)||!Number.isSafeInteger(c.run_id)||c.run_id<=0||!["success","failure","cancelled","skipped","timed_out","action_required","neutral","stale","in_progress","queued","unknown"].includes(c.state))throw Error("Invalid public Core status");
+}
 fs.mkdirSync(path.join(out,"assets/projects"),{recursive:true});
 fs.copyFileSync(path.join(profile,"assets/banner.svg"),path.join(out,"assets/banner.svg"));
 for(const slug of d.featured)fs.copyFileSync(path.join(profile,"assets/projects",slug+".svg"),path.join(out,"assets/projects",slug+".svg"));
