@@ -79,6 +79,13 @@ This fork adds two corporate themes — `neguchads` (graphite and cyan) and `neg
 
 [Brand documentation, examples and safe deployment guidance](docs/neguchads/README.md) · [Neguchads profile](https://github.com/Neguchads)
 
+### Engineering Universe
+
+Explore the public portfolio through a procedural interactive network inspired by [Abyssal Garden](https://github.com/Noniv/abyssal-garden). No dependencies, external assets or API tokens. English and Portuguese, camera controls, reduced motion and detail settings.
+
+[Download the standalone HTML](https://raw.githubusercontent.com/Neguchads/github-homepage/main/docs/explore/index.html) · [Usage and deployment](docs/explore/README.md)
+
+
 # Features <!-- omit in toc -->
 
 - [GitHub Stats Card](#github-stats-card)

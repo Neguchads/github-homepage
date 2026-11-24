@@ -5,12 +5,14 @@ on:
     paths:
       - 'themes/**'
       - 'tests/brand/**'
+      - 'docs/explore/**'
       - '.github/workflows/neguchads-theme.yml'
   push:
     branches: [main]
     paths:
       - 'themes/**'
       - 'tests/brand/**'
+      - 'docs/explore/**'
       - '.github/workflows/neguchads-theme.yml'
   workflow_dispatch:
 
@@ -26,7 +28,7 @@ jobs:
         with:
           persist-credentials: false
       - name: Test theme registration and contrast
-        run: node --test tests/brand/neguchads-theme.mjs
+        run: node --test tests/brand/*.mjs
   rendering:
     runs-on: ubuntu-24.04
     timeout-minutes: 12
