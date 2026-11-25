@@ -1,0 +1,15 @@
+schema_version = 1
+[project]
+name = "github-homepage"
+visibility = "public"
+maturity = "experimental"
+profile = "javascript-tooling"
+[verification]
+require_real_tests = true
+timeout_seconds = 900
+test_dir = "tests/brand"
+[knowledge]
+public_export = false
+[agents]
+approval_for_production = true
+parallel_workers = 2
