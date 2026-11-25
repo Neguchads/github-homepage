@@ -119,7 +119,10 @@ if (
     statusPanel,
   );
   const a = el("a", "GitHub Actions · " + cs.commit.slice(0, 10), statusPanel);
-  a.href = new URL(String(cs.run_id), "https://github.com/Neguchads/navi-core/actions/runs/").href;
+  a.href = new URL(
+    String(cs.run_id),
+    "https://github.com/Neguchads/navi-core/actions/runs/",
+  ).href;
 } else
   el(
     "p",
@@ -205,8 +208,13 @@ for (const p of projects.values())
 for (const e of d.integrations) edge(e.source, e.target, "integration");
 function link(parent, label, url) {
   // Only fixed local fragments and canonical public GitHub repository paths.
-  if (!/^#(?:analytics|featured)$/.test(url) &&
-      !/^https:\/\/github\.com\/Neguchads(?:\/[A-Za-z0-9_-][A-Za-z0-9_.-]{0,99}(?:\/commit\/[a-f0-9]{40})?)?$/.test(url))
+  const prefix = "https://github.com/Neguchads";
+  const local = /^#(?:analytics|featured)$/.test(url);
+  const path = url.startsWith(prefix) ? url.slice(prefix.length) : null;
+  const repository = /^\/[A-Za-z0-9_-][A-Za-z0-9_.-]{0,99}$/;
+  const commit =
+    /^\/[A-Za-z0-9_-][A-Za-z0-9_.-]{0,99}\/commit\/[a-f0-9]{40}$/;
+  if (!local && path !== "" && !repository.test(path) && !commit.test(path))
     return null;
   const a = el("a", label, parent);
   a.href = url;
@@ -412,7 +420,13 @@ canvas.addEventListener("pointerup", (e) => {
 });
 canvas.addEventListener("pointercancel", () => (drag = null));
 for (const slug of d.featured) {
-  if (typeof slug !== "string" || !/^[A-Za-z0-9_.-]{1,100}$/.test(slug) || slug === "." || slug === "..") continue;
+  if (
+    typeof slug !== "string" ||
+    !/^[A-Za-z0-9_.-]{1,100}$/.test(slug) ||
+    slug === "." ||
+    slug === ".."
+  )
+    continue;
   const p = projects.get(slug);
   if (!p) continue;
   const c = el("div", null, $("projects"));
