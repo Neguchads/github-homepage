@@ -1,0 +1,25 @@
+name: NAVI browser smoke
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  explorer:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Browser and driver versions
+        run: |
+          google-chrome --version
+          "${CHROMEWEBDRIVER}/chromedriver" --version
+      - name: Offline desktop and mobile smoke
+        run: python3 scripts/browser-smoke.py

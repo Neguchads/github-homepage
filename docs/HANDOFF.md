@@ -19,3 +19,7 @@ Initial inventory: 28 flagged package entries, 3 production (Axios, form-data, f
 Candidate run [45605340249](https://github.com/Neguchads/navi-githomepage/actions/runs/45605340249): npm reports zero vulnerabilities for both complete and production trees; 246/246 Jest tests passed. Lint initially rejected optional JSDoc syntax, corrected before committing. Lockfile reconstructed and checked against the runner's Git blob SHA. The temporary read-only candidate workflow is retired. The permanent audit gate now requires zero reported vulnerabilities; final committed revision must pass CI independently.
 
 Repository rename: canonical URLs, package name and project manifest now use `navi-githomepage`; the Abyss link uses `navi-abyss`. Historical catalog snapshots and their provenance are retained until the Graphify/profile migration can be reviewed together.
+
+## Rename verification
+
+Commit `f91874667d18a0e201cb0d21c055289ec01f3c15`: npm audit all and production both zero, 246 Jest tests, 7 snapshots, 2 benchmarks, 9 native brand tests, ESLint, Prettier, renderer and CodeQL all passed. The next revision removes the remaining legacy Setup Node action, adds an offline real-browser gate and validates canonical navigation URLs in the concurrently synchronized 15-project catalog. Other ecosystem PRs remain separate. Main Scorecard and deployment validation remain pending.
