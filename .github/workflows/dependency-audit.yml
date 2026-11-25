@@ -1,0 +1,75 @@
+name: NAVI dependency audit
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  schedule:
+    - cron: "30 9 * * 1"
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: dependency-audit-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  audit:
+    name: npm advisory inventory
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "22"
+      - name: Audit locked dependency trees
+        shell: bash
+        run: |
+          mkdir -p audit
+          for scope in all production; do
+            args=()
+            if [ "$scope" = production ]; then args+=(--omit=dev); fi
+            code=0
+            npm audit --json "${args[@]}" > "audit/$scope.json" || code=$?
+            echo "$scope npm audit exit code: $code"
+            node --input-type=module - "$scope" <<'NODE'
+          import fs from "node:fs";
+          const scope = process.argv[2];
+          const report = JSON.parse(fs.readFileSync("audit/" + scope + ".json", "utf8"));
+          if (report.error || !report.metadata?.vulnerabilities || !report.vulnerabilities) {
+            throw new Error("Audit service did not return a valid inventory: " + JSON.stringify(report.error));
+          }
+          const counts = report.metadata.vulnerabilities;
+          console.log(scope + " totals: " + JSON.stringify(counts));
+          let summary = "## " + scope + " dependency audit\n\n" + JSON.stringify(counts) + "\n\n";
+          summary += "| Package | Severity | Direct | Fix |\n| --- | --- | --- | --- |\n";
+          for (const [name, v] of Object.entries(report.vulnerabilities)) {
+            const fix = JSON.stringify(v.fixAvailable);
+            console.log(JSON.stringify({ name, severity: v.severity, direct: v.isDirect, range: v.range, via: v.via, fix: v.fixAvailable, nodes: v.nodes }));
+            summary += "| " + name + " | " + v.severity + " | " + v.isDirect + " | " + fix + " |\n";
+          }
+          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, summary);
+          NODE
+          done
+          echo "Inventory only: advisory counts are reported, not a certification of safety."
+      - name: Retain audit evidence
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: npm-advisory-inventory
+          path: audit/*.json
+          retention-days: 14
+      - name: Enforce zero known dependency vulnerabilities
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from "node:fs";
+          for (const scope of ["all", "production"]) {
+            const report = JSON.parse(fs.readFileSync("audit/" + scope + ".json", "utf8"));
+            if (report.error || report.metadata?.vulnerabilities?.total !== 0) {
+              console.error("Dependency security gate failed: " + scope);
+              process.exitCode = 1;
+            }
+          }
+          NODE

@@ -111,7 +111,7 @@
         ],
         [
           "navi-githomepage",
-          "GitHub Homepage"
+          "NAVI GitHub Homepage"
         ],
         [
           "navi-graphify",
@@ -120,6 +120,14 @@
         [
           "Neguchads",
           "Neguchads Profile"
+        ],
+        [
+          "navi-abyss",
+          "NAVI Abyss"
+        ],
+        [
+          "navi-core",
+          "NAVI Core"
         ]
       ]
     }
@@ -139,6 +147,21 @@
       "source": "Neguchads",
       "target": "navi-graphify",
       "kind": "project-discovery"
+    },
+    {
+      "source": "navi-abyss",
+      "target": "navi-githomepage",
+      "kind": "immersive-theme-provider"
+    },
+    {
+      "source": "Neguchads",
+      "target": "navi-abyss",
+      "kind": "public-experience-publisher"
+    },
+    {
+      "source": "navi-core",
+      "target": "navi-abyss",
+      "kind": "verification-provider"
     }
   ]
 }

@@ -1,5 +1,170 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Neguchads | NAVI Engineering Universe</title><style>/*THEME*/</style></head><body><main><header><img src="assets/banner.svg" alt="Neguchads — Explore. Build. Verify."><p class="eyebrow">NAVI / Engineering Universe</p><h1 data-pt="Inteligência de engenharia interconectada">Interconnected engineering intelligence</h1><p data-pt="Explore projetos, tecnologias, relações e métricas públicas em um único universo.">Explore projects, technologies, relationships and public metrics in a single universe.</p><div role="group" aria-label="Language / Idioma" class="controls"><button type="button" id="lang-en" lang="en" aria-pressed="true">EN</button><button type="button" id="lang-pt" lang="pt-BR" aria-pressed="false">PT-BR</button></div><nav><a href="#overview" data-pt="Visão geral">Overview</a><a href="#graph" data-pt="Grafo 3D">3D graph</a><a href="#featured" data-pt="Projetos em destaque">Featured projects</a><a href="#analytics" data-pt="Análise do GitHub">GitHub Analytics</a><a href="https://github.com/Neguchads" data-pt="Perfil GitHub">GitHub Profile</a><a href="abyss.html" data-pt="Experiência Abyss (WebGPU)">Abyss experience (WebGPU)</a></nav></header>
-<section id="overview"><h2 data-pt="Perfil e visão geral">Profile &amp; Overview</h2><div id="totals" class="grid"></div><p id="date" class="muted"></p><section class="panel"><h3 data-pt="NAVI Core — estado de engenharia">NAVI Core — engineering status</h3><div id="core-status"></div></section></section>
-<section id="graph" class="panel"><h2 data-pt="Universo de conhecimento">Knowledge universe</h2><div class="controls"><input id="search" placeholder="Search node or technology" aria-label="Search node" data-pt-placeholder="Buscar nó ou tecnologia" data-pt-label="Buscar nó"><select id="filter" aria-label="Relationship type" data-pt-label="Tipo de conexão"><option value="all" data-pt="Todas as relações">All relationships</option><option value="integration" data-pt="Integrações">Integrations</option><option value="membership" data-pt="Setores e projetos">Sectors and projects</option><option value="technology" data-pt="Tecnologias">Technologies</option></select><button id="rotate" data-pt="Girar / pausar">Rotate / pause</button><button id="reset" data-pt="Centralizar">Reset view</button></div><div class="graph-layout"><div class="scene"><canvas id="canvas" aria-label="Three-dimensional perspective graph. Use the adjacent list to access nodes." data-pt-label="Grafo tridimensional com projeção em perspectiva. Use a lista ao lado para acessar os nós."></canvas></div><aside><h3 id="detail-title">Neguchads</h3><div id="detail"></div><h3 data-pt="Nós do universo">Universe nodes</h3><div id="nodes"></div></aside></div><p class="muted" data-pt="Arraste para rotacionar. Selecione um nó no grafo ou na lista. Linhas sólidas: catálogo editorial; tracejadas: integrações declaradas; pontilhadas: linguagem principal informada pelo GitHub. Não representam dependências AST.">Drag to rotate. Select a node in the graph or list. Solid lines: curated catalog; dashed: declared integrations; dotted: primary language reported by GitHub. These are not AST dependencies.</p></section>
-<section id="featured"><h2 data-pt="Projetos em destaque">Featured projects</h2><div id="projects" class="grid"></div></section>
-<section id="analytics" class="panel"><h2 data-pt="Análise do GitHub">GitHub Analytics</h2><p data-pt="Totais de projetos públicos originais ativos, exceto o perfil; repositórios públicos incluem forks. Itens abertos incluem PRs. Linguagens representam a linguagem principal de cada projeto.">Totals cover active original public projects, excluding the profile; public repositories include forks. Open items include PRs. Languages represent each project's primary language.</p><h3 data-pt="Tecnologias">Technologies</h3><div id="languages"></div><h3 data-pt="Histórico de 90 dias">90-day history</h3><div class="scroll"><table><thead><tr><th data-pt="Data UTC">UTC date</th><th data-pt="Originais">Originals</th><th>Stars</th><th>Forks</th><th data-pt="Itens abertos">Open items</th></tr></thead><tbody id="history"></tbody></table></div><h3 data-pt="Graphify / métricas estruturais">Graphify / structural metrics</h3><div id="structural"></div><details><summary data-pt="Proveniência e metodologia">Provenance and methodology</summary><div id="sources"></div></details></section><footer><span data-pt="Explore · Build · Verify — dados públicos, sem telemetria.">Explore · Build · Verify — public data, no telemetry.</span> <a href="snapshot.json" data-pt="Snapshot JSON">JSON snapshot</a></footer></main><script type="application/json" id="data">/*DATA*/</script><script>/*SCRIPT*/</script></body></html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Neguchads | NAVI Engineering Universe</title>
+    <style>
+      /*THEME*/
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <img
+          src="assets/banner.svg"
+          alt="Neguchads — Explore. Build. Verify."
+        />
+        <p class="eyebrow">NAVI / Engineering Universe</p>
+        <h1 data-pt="Inteligência de engenharia interconectada">
+          Interconnected engineering intelligence
+        </h1>
+        <p
+          data-pt="Explore projetos, tecnologias, relações e métricas públicas em um único universo."
+        >
+          Explore projects, technologies, relationships and public metrics in a
+          single universe.
+        </p>
+        <div role="group" aria-label="Language / Idioma" class="controls">
+          <button type="button" id="lang-en" lang="en" aria-pressed="true">
+            EN</button
+          ><button type="button" id="lang-pt" lang="pt-BR" aria-pressed="false">
+            PT-BR
+          </button>
+        </div>
+        <nav>
+          <a href="#overview" data-pt="Visão geral">Overview</a
+          ><a href="#graph" data-pt="Grafo 3D">3D graph</a
+          ><a href="#featured" data-pt="Projetos em destaque"
+            >Featured projects</a
+          ><a href="#analytics" data-pt="Análise do GitHub">GitHub Analytics</a
+          ><a href="https://github.com/Neguchads" data-pt="Perfil GitHub"
+            >GitHub Profile</a
+          ><a href="cosmic.html" data-pt="Oceano cósmico NAVI Abyss"
+            >NAVI Abyss cosmic ocean</a
+          ><a href="abyss.html" data-pt="Experiência legada Abyss (WebGPU)"
+            >Legacy Abyss experience (WebGPU)</a
+          >
+        </nav>
+      </header>
+      <section id="overview">
+        <h2 data-pt="Perfil e visão geral">Profile &amp; Overview</h2>
+        <div id="totals" class="grid"></div>
+        <p id="date" class="muted"></p>
+        <section class="panel">
+          <h3 data-pt="NAVI Core — estado de engenharia">
+            NAVI Core — engineering status
+          </h3>
+          <div id="core-status"></div>
+        </section>
+      </section>
+      <section id="graph" class="panel">
+        <h2 data-pt="Universo de conhecimento">Knowledge universe</h2>
+        <div class="controls">
+          <input
+            id="search"
+            placeholder="Search node or technology"
+            aria-label="Search node"
+            data-pt-placeholder="Buscar nó ou tecnologia"
+            data-pt-label="Buscar nó"
+          /><select
+            id="filter"
+            aria-label="Relationship type"
+            data-pt-label="Tipo de conexão"
+          >
+            <option value="all" data-pt="Todas as relações">
+              All relationships
+            </option>
+            <option value="integration" data-pt="Integrações">
+              Integrations
+            </option>
+            <option value="membership" data-pt="Setores e projetos">
+              Sectors and projects
+            </option>
+            <option value="technology" data-pt="Tecnologias">
+              Technologies
+            </option></select
+          ><button id="rotate" data-pt="Girar / pausar">Rotate / pause</button
+          ><button id="reset" data-pt="Centralizar">Reset view</button>
+        </div>
+        <div class="graph-layout">
+          <div class="scene">
+            <canvas
+              id="canvas"
+              aria-label="Three-dimensional perspective graph. Use the adjacent list to access nodes."
+              data-pt-label="Grafo tridimensional com projeção em perspectiva. Use a lista ao lado para acessar os nós."
+            ></canvas>
+          </div>
+          <aside>
+            <h3 id="detail-title">Neguchads</h3>
+            <div id="detail"></div>
+            <h3 data-pt="Nós do universo">Universe nodes</h3>
+            <div id="nodes"></div>
+          </aside>
+        </div>
+        <p
+          class="muted"
+          data-pt="Arraste para rotacionar. Selecione um nó no grafo ou na lista. Linhas sólidas: catálogo editorial; tracejadas: integrações declaradas; pontilhadas: linguagem principal informada pelo GitHub. Não representam dependências AST."
+        >
+          Drag to rotate. Select a node in the graph or list. Solid lines:
+          curated catalog; dashed: declared integrations; dotted: primary
+          language reported by GitHub. These are not AST dependencies.
+        </p>
+      </section>
+      <section id="featured">
+        <h2 data-pt="Projetos em destaque">Featured projects</h2>
+        <div id="projects" class="grid"></div>
+      </section>
+      <section id="analytics" class="panel">
+        <h2 data-pt="Análise do GitHub">GitHub Analytics</h2>
+        <p
+          data-pt="Totais de projetos públicos originais ativos, exceto o perfil; repositórios públicos incluem forks. Itens abertos incluem PRs. Linguagens representam a linguagem principal de cada projeto."
+        >
+          Totals cover active original public projects, excluding the profile;
+          public repositories include forks. Open items include PRs. Languages
+          represent each project's primary language.
+        </p>
+        <h3 data-pt="Tecnologias">Technologies</h3>
+        <div id="languages"></div>
+        <h3 data-pt="Histórico de 90 dias">90-day history</h3>
+        <div class="scroll">
+          <table>
+            <thead>
+              <tr>
+                <th data-pt="Data UTC">UTC date</th>
+                <th data-pt="Originais">Originals</th>
+                <th>Stars</th>
+                <th>Forks</th>
+                <th data-pt="Itens abertos">Open items</th>
+              </tr>
+            </thead>
+            <tbody id="history"></tbody>
+          </table>
+        </div>
+        <h3 data-pt="Graphify / métricas estruturais">
+          Graphify / structural metrics
+        </h3>
+        <div id="structural"></div>
+        <details>
+          <summary data-pt="Proveniência e metodologia">
+            Provenance and methodology
+          </summary>
+          <div id="sources"></div>
+        </details>
+      </section>
+      <footer>
+        <span
+          data-pt="Explore · Build · Verify — dados públicos, sem telemetria."
+          >Explore · Build · Verify — public data, no telemetry.</span
+        >
+        <a href="snapshot.json" data-pt="Snapshot JSON">JSON snapshot</a>
+      </footer>
+    </main>
+    <script type="application/json" id="data">
+      /*DATA*/
+    </script>
+    <script>
+      /*SCRIPT*/
+    </script>
+  </body>
+</html>

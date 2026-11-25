@@ -97,14 +97,14 @@ const wakaTimeData = {
     total_seconds: 80473.135716,
     total_seconds_including_other_language: 81643.570077,
     user_id: "random hash",
-    username: "ishandutta2007",
+    username: "navi-fixture",
     writes_only: false,
   },
 };
 
 describe("WakaTime fetcher", () => {
   it("should fetch correct wakatime data", async () => {
-    const username = "ishandutta2007";
+    const username = "navi-fixture";
     mock
       .onGet(
         `https://wakatime.com/api/v1/users/${username}/stats?is_including_today=true`,
@@ -116,7 +116,7 @@ describe("WakaTime fetcher", () => {
   });
 
   it("should throw error if username param missing", async () => {
-    mock.onGet(/\/https:\/\/wakatime\.com\/api/).reply(404, wakaTimeData);
+    mock.onGet().reply(404, wakaTimeData);
 
     await expect(fetchWakatimeStats("noone")).rejects.toThrow(
       'Missing params "username" make sure you pass the parameters in URL',
@@ -129,6 +129,56 @@ describe("WakaTime fetcher", () => {
     await expect(fetchWakatimeStats({ username: "noone" })).rejects.toThrow(
       "Could not resolve to a User with the login of 'noone'",
     );
+  });
+
+  it.each([
+    "example.invalid",
+    "wakatime.com.example.invalid",
+    "wakatime.com:443",
+    "wakatime.com/path",
+    ["wakatime.com"],
+  ])(
+    "rejects an unapproved API domain without making a request: %s",
+    async (api_domain) => {
+      await expect(
+        fetchWakatimeStats({ username: "navi-fixture", api_domain }),
+      ).rejects.toThrow("Unsupported WakaTime API domain");
+      expect(mock.history.get).toHaveLength(0);
+    },
+  );
+
+  it.each(["../other", ".", "..", "a/b", ["user"]])(
+    "rejects invalid username without making a request: %s",
+    async (username) => {
+      await expect(fetchWakatimeStats({ username })).rejects.toThrow(
+        "Invalid WakaTime username",
+      );
+      expect(mock.history.get).toHaveLength(0);
+    },
+  );
+
+  it("uses a fixed HTTPS origin with bounded requests and no redirects", async () => {
+    mock
+      .onGet(
+        "https://wakatime.com/api/v1/users/navi-fixture/stats?is_including_today=true",
+      )
+      .reply(200, wakaTimeData);
+    await fetchWakatimeStats({
+      username: "navi-fixture",
+      api_domain: "WAKATIME.COM/",
+    });
+    expect(mock.history.get[0]).toMatchObject({
+      maxRedirects: 0,
+      timeout: 10000,
+      maxContentLength: 2097152,
+    });
+  });
+
+  it("handles transport errors without exposing internal error details", async () => {
+    mock.onGet().networkError();
+    await expect(
+      fetchWakatimeStats({ username: "navi-fixture" }),
+    ).rejects.toThrow("WakaTime request failed");
   });
 });
 

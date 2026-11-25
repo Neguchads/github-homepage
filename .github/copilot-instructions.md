@@ -1,0 +1,1 @@
+Read AGENTS.md and .navi/project.toml first. Use small, bounded tasks; preserve public API compatibility, public-only data boundaries, and test evidence. Escalate ambiguous or production-changing work to the maintainer. Do not add providers, tokens or deployment automation without approval.

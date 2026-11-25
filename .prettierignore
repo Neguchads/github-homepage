@@ -3,3 +3,6 @@ node_modules
 *.md
 coverage
 .vercel
+
+# Generated embedded catalog is verified by build-portfolio.mjs --check.
+docs/explore/index.html

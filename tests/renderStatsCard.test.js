@@ -14,7 +14,7 @@ import "@testing-library/jest-dom";
 import { themes } from "../themes/index.js";
 
 const stats = {
-  name: "Ishan",
+  name: "Navi Fixture",
   totalStars: 100,
   totalCommits: 200,
   totalIssues: 300,
@@ -33,7 +33,7 @@ describe("Test renderStatsCard", () => {
     document.body.innerHTML = renderStatsCard(stats);
 
     expect(document.getElementsByClassName("header")[0].textContent).toBe(
-      "Ishan's GitHub Stats",
+      "Navi Fixture's GitHub Stats",
     );
 
     expect(
@@ -146,10 +146,7 @@ describe("Test renderStatsCard", () => {
       card_width: 1,
       hide_rank: true,
     });
-    expect(document.querySelector("svg")).toHaveAttribute(
-      "width",
-      "287",
-    );
+    expect(document.querySelector("svg")).toHaveAttribute("width", "289.15625");
 
     // Test minimum card width without rank and with icons.
     document.body.innerHTML = renderStatsCard(stats, {
@@ -157,10 +154,7 @@ describe("Test renderStatsCard", () => {
       hide_rank: true,
       show_icons: true,
     });
-    expect(document.querySelector("svg")).toHaveAttribute(
-      "width",
-      "304",
-    );
+    expect(document.querySelector("svg")).toHaveAttribute("width", "306.15625");
 
     // Test minimum card width with rank and icons.
     document.body.innerHTML = renderStatsCard(stats, {
@@ -359,7 +353,7 @@ describe("Test renderStatsCard", () => {
 
     expect(
       document.body.getElementsByTagName("svg")[0].getAttribute("width"),
-    ).toBe("287");
+    ).toBe("289.15625");
   });
 
   it("should auto resize if hide_rank is true & custom_title is set", () => {
@@ -388,7 +382,7 @@ describe("Test renderStatsCard", () => {
   it("should render translations", () => {
     document.body.innerHTML = renderStatsCard(stats, { locale: "cn" });
     expect(document.getElementsByClassName("header")[0].textContent).toBe(
-      "Ishan 的 GitHub 统计数据",
+      "Navi Fixture 的 GitHub 统计数据",
     );
     expect(
       document.querySelector(
