@@ -2,7 +2,7 @@
 
 ![Neguchads — Explore. Build. Verify.](banner.svg)
 
-A brand extension of [Beautiful GitHub Homepage](https://github.com/ishandutta2007/beautiful-github-homepage). The upstream MIT license and authorship are preserved.
+The native NAVI visual system for reusable GitHub cards. See [credits and license](../../CREDITS.md).
 
 ## Brand themes
 
@@ -27,7 +27,7 @@ These are local static design examples, not live API responses. The project card
 
 ## Use your own deployment
 
-Replace YOUR_DEPLOYMENT with the URL of a deployed instance of **this fork**, not the upstream public service. No deployment is provisioned by this change.
+Replace YOUR_DEPLOYMENT with the URL of a deployed instance of **this repository**, not the a third-party public service. No deployment is provisioned by this change.
 
 ```text
 https://YOUR_DEPLOYMENT/api?username=Neguchads&theme=neguchads&show_icons=true&hide_rank=true&show=prs_merged&disable_animations=true
@@ -41,7 +41,7 @@ Use the same options with `theme=neguchads_light` inside a GitHub `picture` elem
 
 The live [Neguchads profile](https://github.com/Neguchads/Neguchads) uses its own self-hosted SVG cards. Public showcase cards refresh through GitHub Actions; private-inclusive aggregate cards are generated locally using the authenticated GitHub CLI. See [profile analytics methodology](https://github.com/Neguchads/Neguchads/blob/main/docs/PROFILE_ANALYTICS.md).
 
-Do not deploy this public API with a token that can read private repositories. The upstream service was designed to render statistics from token-accessible data; this theme extension is not an authorization or privacy audit. Use the separate local aggregate workflow for private-inclusive statistics, review outputs before committing, and never publish credentials or private repository identifiers. Do not interpret language percentages as a developer proficiency rating.
+Do not deploy this public API with a token that can read private repositories. The card engine was designed to render statistics from token-accessible data; this theme extension is not an authorization or privacy audit. Use the separate local aggregate workflow for private-inclusive statistics, review outputs before committing, and never publish credentials or private repository identifiers. Do not interpret language percentages as a developer proficiency rating.
 
 ## Validate
 

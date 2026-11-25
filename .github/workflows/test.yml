@@ -2,12 +2,13 @@ name: Test
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
-      - master
+      - main
 
-permissions: read-all
+permissions:
+  contents: read
 
 jobs:
   build:
@@ -15,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [18.x]
+        node-version: [22.x]
 
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
@@ -28,8 +29,8 @@ jobs:
 
       - name: Install & Test
         run: |
-          npm ci
-          npm run test
+          npm ci --ignore-scripts
+          npm run test -- --runInBand
 
       - name: Run ESLint
         run: |
@@ -43,5 +44,3 @@ jobs:
         run: |
           npm run format:check
 
-      - name: Code Coverage
-        uses: codecov/codecov-action@eaaf4bedf32dbdc6b720b63067d99c4d77d6047d # v3.1.4

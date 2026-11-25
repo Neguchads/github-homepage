@@ -1,22 +1,23 @@
 {
-  "name": "beautiful-github-homepage",
+  "name": "navi-github-homepage",
   "version": "1.0.0",
-  "description": "Dynamically generate stats for your GitHub readme",
+  "description": "NAVI-powered GitHub profile cards and engineering universe",
   "keywords": [
-    "beautiful-github-homepage",
+    "navi",
+    "github",
     "readme-stats",
     "cards",
-    "card-generator"
+    "engineering-universe"
   ],
   "main": "src/index.js",
   "type": "module",
-  "homepage": "https://github.com/ishandutta2007/beautiful-github-homepage",
+  "homepage": "https://github.com/Neguchads/github-homepage",
   "bugs": {
-    "url": "https://github.com/ishandutta2007/beautiful-github-homepage/issues"
+    "url": "https://github.com/Neguchads/github-homepage/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ishandutta2007/beautiful-github-homepage.git"
+    "url": "https://github.com/Neguchads/github-homepage.git"
   },
   "scripts": {
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage",
@@ -24,16 +25,16 @@
     "test:update:snapshot": "node --experimental-vm-modules node_modules/jest/bin/jest.js -u",
     "test:e2e": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config jest.e2e.config.js",
     "theme-readme-gen": "node scripts/generate-theme-doc",
-    "preview-theme": "node scripts/preview-theme",
-    "close-stale-theme-prs": "node scripts/close-stale-theme-prs",
     "generate-langs-json": "node scripts/generate-langs-json",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "prepare": "husky install",
     "lint": "npx eslint --max-warnings 0 \"./src/**/*.js\" \"./scripts/**/*.js\" \"./tests/**/*.js\" \"./api/**/*.js\" \"./themes/**/*.js\"",
-    "bench": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config jest.bench.config.js"
+    "bench": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config jest.bench.config.js",
+    "test:brand": "node --test tests/brand/*.mjs",
+    "verify:portfolio": "node scripts/build-portfolio.mjs --check"
   },
-  "author": "Ishan",
+  "author": "Neguchads (maintainer)",
   "license": "MIT",
   "devDependencies": {
     "@actions/core": "^1.10.1",
@@ -69,5 +70,6 @@
   },
   "engines": {
     "node": ">=18.0.0"
-  }
+  },
+  "private": true
 }

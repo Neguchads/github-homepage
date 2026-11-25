@@ -1,6 +1,6 @@
 # Engineering Universe
 
-A standalone interactive portfolio inspired by the procedural exploration concept of [Abyssal Garden](https://github.com/Noniv/abyssal-garden). The original project uses WebGPU and synthesized audio; this independent implementation uses a lightweight Canvas 2D perspective projection, no external libraries, no audio and no copied renderer code.
+A standalone interactive portfolio using lightweight Canvas 2D perspective projection, no external libraries, no audio and no copied renderer code.
 
 ## Open
 
@@ -21,7 +21,7 @@ The scene is a conceptual map, not a quantitative activity visualization. Node s
 
 Run `node --test tests/brand/engineering-universe.mjs` from the repository root. Tests cover offline initialization, language and station navigation, projection, and the explicit public link list. Browser/GPU visual performance still needs manual testing.
 
-The source and upstream MIT license are preserved. This is an independent adaptation of the exploration concept, with credit to Abyssal Garden.
+See [credits and license](../../CREDITS.md) for inspiration and provenance.
 
 ## NAVI integration
 
