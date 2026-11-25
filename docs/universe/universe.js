@@ -3,7 +3,7 @@ const d = JSON.parse(document.getElementById("data").textContent),
   $ = (id) => document.getElementById(id),
   el = (tag, text, parent) => {
     const e = document.createElement(tag);
-    if (text != null) e.textContent = text;
+    if (text != null) e.append(document.createTextNode(String(text)));
     if (parent) parent.append(e);
     return e;
   };
@@ -23,7 +23,7 @@ const pt = locale === "pt-BR",
 document.documentElement.lang = locale;
 if (pt) {
   for (const e of document.querySelectorAll("[data-pt]"))
-    e.textContent = e.dataset.pt;
+    e.replaceChildren(document.createTextNode(e.dataset.pt));
   for (const e of document.querySelectorAll("[data-pt-label]"))
     e.setAttribute("aria-label", e.dataset.ptLabel);
   for (const e of document.querySelectorAll("[data-pt-placeholder]"))
@@ -119,7 +119,7 @@ if (
     statusPanel,
   );
   const a = el("a", "GitHub Actions · " + cs.commit.slice(0, 10), statusPanel);
-  a.href = "https://github.com/Neguchads/navi-core/actions/runs/" + cs.run_id;
+  a.href = new URL(String(cs.run_id), "https://github.com/Neguchads/navi-core/actions/runs/").href;
 } else
   el(
     "p",
@@ -204,13 +204,17 @@ for (const p of projects.values())
   if (p.language) edge(p.slug, "tech:" + p.language, "technology");
 for (const e of d.integrations) edge(e.source, e.target, "integration");
 function link(parent, label, url) {
+  // Only fixed local fragments and canonical public GitHub repository paths.
+  if (!/^#(?:analytics|featured)$/.test(url) &&
+      !/^https:\/\/github\.com\/Neguchads(?:\/[A-Za-z0-9_.-]{1,100})?$/.test(url))
+    return null;
   const a = el("a", label, parent);
   a.href = url;
   return a;
 }
 function selectNode(n) {
   selected = n.id;
-  $("detail-title").textContent = n.label;
+  $("detail-title").replaceChildren(document.createTextNode(String(n.label)));
   const box = $("detail");
   box.replaceChildren();
   el("p", kindLabel(n.kind), box);
@@ -408,12 +412,13 @@ canvas.addEventListener("pointerup", (e) => {
 });
 canvas.addEventListener("pointercancel", () => (drag = null));
 for (const slug of d.featured) {
+  if (typeof slug !== "string" || !/^[A-Za-z0-9_.-]{1,100}$/.test(slug) || slug === "." || slug === "..") continue;
   const p = projects.get(slug);
   if (!p) continue;
   const c = el("div", null, $("projects"));
   c.className = "panel project";
   const image = el("img", null, c);
-  image.src = "assets/projects/" + slug + ".svg";
+  image.src = "assets/projects/" + encodeURIComponent(slug) + ".svg";
   image.alt = p.title;
   link(c, p.title, "https://github.com/Neguchads/" + encodeURIComponent(slug));
   el("span", p.stars + " stars · " + p.forks + " forks", c);

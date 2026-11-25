@@ -27,3 +27,5 @@ Commit `f91874667d18a0e201cb0d21c055289ec01f3c15`: npm audit all and production 
 ## Base synchronization
 
 All six active CI workflows passed at `c7912df` (dependency audit, native tests, NEF, theme, browser smoke and CodeQL). Main advanced in PR #8 to `2d76de8`; its canonical URLs and manifest are already included. The catalog's newer reviewed Graphify candidate was checked for exact JSON equivalence; it supersedes the historical normalization mapping. Retain the new standalone download link, refreshed 15-project catalog and cosmic integration. Merge main into the PR branch without a force push. Review final CI and upstream release pins before production publication.
+
+Security follow-up: CodeQL check reported two high severity DOM text reinterpretation alerts (19 and 20) despite a successful workflow job. Harden literal text rendering, restrict generated links and validate image slugs; browser smoke exercises a hostile label in the actual Universe. Do not merge until the new CodeQL check itself is green.

@@ -127,3 +127,10 @@ test("public universe bundle and SVG", () => {
     fs.rmSync(root, { recursive: true, force: true });
   }
 });
+
+ test("Universe rendering uses literal text nodes and no HTML sinks", () => {
+  const source = fs.readFileSync("docs/universe/universe.js", "utf8");
+  assert.ok(source.includes("document.createTextNode"));
+  assert.doesNotMatch(source, /\b(?:innerHTML|outerHTML|insertAdjacentHTML|document\.write)\b/);
+  assert.ok(source.includes('encodeURIComponent(slug) + ".svg"'));
+});

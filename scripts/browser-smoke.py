@@ -134,6 +134,30 @@ with tempfile.TemporaryDirectory() as temp:
                     urls.append(event["params"]["request"]["url"])
             check(not any(u.startswith(("http://", "https://")) for u in urls),
                   "offline explorer makes no network requests")
+            # Exercise the actual Universe renderer with hostile public labels.
+            cdp("Emulation.clearDeviceMetricsOverride", {})
+            marker = '<img id="injected" src=x onerror="window.injected=1">'
+            fixture = {
+                "date": "2026-11-25",
+                "totals": {"public_repositories": 1, "active_originals": 1,
+                           "stars": 0, "forks": 0, "open_items": 0, "followers": 0},
+                "sectors": [{"id": "s0", "en": "Test", "pt": "Teste", "color": "#63daff",
+                             "pos": [1, 0, 1], "projects": [{"slug": "test", "title": marker,
+                             "language": "C", "stars": 0, "forks": 0, "open_items": 0}]}],
+                "featured": [], "integrations": [], "structural": {}, "languages": {},
+                "history": [], "core_status": None,
+            }
+            template = (ROOT / "docs/universe/template.html").read_text(encoding="utf-8")
+            source = (ROOT / "docs/universe/universe.js").read_text(encoding="utf-8")
+            page = Path(temp) / "universe-security.html"
+            page.write_text(template.replace("/*THEME*/", "").replace(
+                "/*DATA*/", json.dumps(fixture).replace("<", "\\u003c")).replace(
+                "/*SCRIPT*/", source), encoding="utf-8")
+            request("POST", prefix + "/url", {"url": page.as_uri()})
+            check(execute("return [...document.querySelectorAll('#nodes button')].some(b=>b.textContent.includes('id=\"injected\"'))"),
+                  "Universe renders hostile label as literal text")
+            check(execute("return !document.getElementById('injected') && !window.injected"),
+                  "Universe hostile label does not become executable DOM")
         finally:
             request("DELETE", prefix)
     finally:
