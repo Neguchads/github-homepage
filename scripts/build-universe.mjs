@@ -63,7 +63,15 @@ for (const slug of d.featured)
     path.join(profile, "assets/projects", slug + ".svg"),
     path.join(out, "assets/projects", slug + ".svg"),
   );
-fs.copyFileSync(path.join(abyss, "index.html"), path.join(out, "abyss.html"));
+fs.writeFileSync(
+  path.join(out, "abyss.html"),
+  read(path.join(abyss, "index.html")).replace('href="reference.html"', 'href="cosmic.html"'),
+);
+const cosmic = read(path.join(abyss, "reference.html"))
+  .replace('href="index.html"', 'href="abyss.html"')
+  .replace('href="docs/CAPTURES.md"', 'href="https://github.com/Neguchads/navi-abyss/blob/main/docs/CAPTURES.md"')
+  .replace('href="LICENSE"', 'href="ABYSS-LICENSE.txt"');
+fs.writeFileSync(path.join(out, "cosmic.html"), cosmic);
 fs.copyFileSync(
   path.join(abyss, "LICENSE"),
   path.join(out, "ABYSS-LICENSE.txt"),

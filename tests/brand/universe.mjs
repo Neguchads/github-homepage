@@ -17,7 +17,11 @@ test("public universe bundle and SVG", () => {
       path.join(a, "integration/universe.css"),
       "body{color:white}",
     );
-    fs.writeFileSync(path.join(a, "index.html"), "<html></html>");
+    fs.writeFileSync(path.join(a, "index.html"), '<a href="reference.html">Cosmic</a>');
+    fs.writeFileSync(
+      path.join(a, "reference.html"),
+      '<a href="index.html">Legacy</a><a href="LICENSE">MIT</a><a href="docs/CAPTURES.md">Evidence</a>',
+    );
     fs.writeFileSync(path.join(a, "LICENSE"), "MIT");
     fs.writeFileSync(path.join(p, "assets/banner.svg"), "<svg/>");
     const totals = {
@@ -86,6 +90,12 @@ test("public universe bundle and SVG", () => {
     assert.ok(!html.includes("<script>test</script>"));
     assert.ok(svg.includes("&lt;script&gt;"));
     assert.ok(fs.existsSync(path.join(o, "snapshot.json")));
+    assert.ok(html.includes('href="cosmic.html"'));
+    assert.ok(fs.readFileSync(path.join(o, "abyss.html"), "utf8").includes('href="cosmic.html"'));
+    const cosmic = fs.readFileSync(path.join(o, "cosmic.html"), "utf8");
+    assert.ok(cosmic.includes('href="abyss.html"'));
+    assert.ok(cosmic.includes('href="ABYSS-LICENSE.txt"'));
+    assert.ok(cosmic.includes("https://github.com/Neguchads/navi-abyss/blob/main/docs/CAPTURES.md"));
     assert.ok(html.includes('id="core-status"'));
     assert.equal(
       JSON.parse(fs.readFileSync(path.join(o, "snapshot.json"), "utf8"))
