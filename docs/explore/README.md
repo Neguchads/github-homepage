@@ -28,3 +28,5 @@ The source and upstream MIT license are preserved. This is an independent adapta
 `catalog.json` is a reviewed snapshot of NAVI Graphify's [portfolio contract](https://github.com/Neguchads/navi-graphify/blob/d79374348c172e26efd61c7f89377a54a600f1d6/integrations/portfolio/catalog.json). `public-summaries.json` starts empty: optional numeric structural summaries must come from the NAVI public-only exporter and be reviewed before import. No raw graph or private graph enters this repository. Sector edges indicate editorial membership, not code dependencies.
 
 Run `node scripts/build-portfolio.mjs` from the root to regenerate the offline HTML and bilingual profile SVGs. `--check` verifies deterministic output. The profile uses a copy of the generated SVG; copy it after reviewed updates. The catalog source is pinned; update the snapshot and provenance together in a PR. No external fetch occurs in the browser.
+
+The historical catalog source remains pinned. The reviewed local snapshot normalizes renamed repository slugs using the explicit mapping in `catalog-source.json`; no other catalog membership changes.

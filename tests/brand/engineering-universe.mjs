@@ -52,5 +52,5 @@ test("projection is finite and centered, quality and privacy boundaries are expl
   assert.equal(vm.runInContext("project([0,0,20])",ctx),null);
   assert.doesNotMatch(html, /<script[^>]+src=|<link[^>]+stylesheet|fetch\s*\(|XMLHttpRequest|localStorage/);
   const slugs = vm.runInContext("sectors.flatMap(s=>s.repos.map(r=>r[0])).join(',')",ctx).split(",");
-  assert.deepEqual(slugs.sort(),["chad-recomp","cdos-nintendods-recomp","ccod-xbox-recomp","csotn-saturn-recomp","ScriptForge","comfyui","starlight-bi","favorite-manager","spec-to-proof","codex-config-universal","github-homepage","navi-graphify","Neguchads"].sort());
+  assert.deepEqual(slugs.sort(),["chad-recomp","cdos-nintendods-recomp","ccod-xbox-recomp","csotn-saturn-recomp","ScriptForge","comfyui","starlight-bi","favorite-manager","spec-to-proof","codex-config-universal","navi-githomepage","navi-graphify","Neguchads"].sort());
 });

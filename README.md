@@ -85,7 +85,7 @@ Explore the public portfolio through a procedural interactive network inspired b
 
 **Knowledge layer:** [NAVI Graphify](https://github.com/Neguchads/navi-graphify) supplies the reviewed public catalog and optional code-only structural summaries. The renderer generates the offline experience and static profile SVGs from that contract.
 
-[Download the standalone HTML](https://raw.githubusercontent.com/Neguchads/github-homepage/main/docs/explore/index.html) · [Usage and deployment](docs/explore/README.md)
+[Download the standalone HTML](https://raw.githubusercontent.com/Neguchads/navi-githomepage/main/docs/explore/index.html) · [Usage and deployment](docs/explore/README.md)
 
 
 # Features <!-- omit in toc -->

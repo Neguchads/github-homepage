@@ -1,6 +1,6 @@
 # NAVI Universe renderer
 
-Consumes the version-1 public snapshot from [NAVI Graphify](https://github.com/Neguchads/navi-graphify) and the responsive theme + optional WebGPU world from [Navyv Abyss](https://github.com/Neguchads/navyv-abyss). The [Neguchads profile](https://github.com/Neguchads/Neguchads) publishes the bundle.
+Consumes the version-1 public snapshot from [NAVI Graphify](https://github.com/Neguchads/navi-graphify) and the responsive theme + optional WebGPU world from [NAVI Abyss](https://github.com/Neguchads/navi-abyss). The [Neguchads profile](https://github.com/Neguchads/Neguchads) publishes the bundle.
 
 `node scripts/build-universe.mjs SNAPSHOT ABYSS_ROOT PROFILE_ROOT OUTPUT`
 
