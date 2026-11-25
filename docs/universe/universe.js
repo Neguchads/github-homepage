@@ -212,8 +212,7 @@ function link(parent, label, url) {
   const local = /^#(?:analytics|featured)$/.test(url);
   const path = url.startsWith(prefix) ? url.slice(prefix.length) : null;
   const repository = /^\/[A-Za-z0-9_-][A-Za-z0-9_.-]{0,99}$/;
-  const commit =
-    /^\/[A-Za-z0-9_-][A-Za-z0-9_.-]{0,99}\/commit\/[a-f0-9]{40}$/;
+  const commit = /^\/[A-Za-z0-9_-][A-Za-z0-9_.-]{0,99}\/commit\/[a-f0-9]{40}$/;
   if (!local && path !== "" && !repository.test(path) && !commit.test(path))
     return null;
   const a = el("a", label, parent);
