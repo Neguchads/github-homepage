@@ -18,11 +18,52 @@ if (
   !/^\d{4}-\d{2}-\d{2}$/.test(d.date)
 )
   throw Error("Invalid snapshot");
-const names = new Set(d.sectors.flatMap((s) => s.projects.map((p) => p.slug)));
+const slugOK = (s) =>
+  typeof s === "string" && /^[A-Za-z0-9_-][A-Za-z0-9_.-]{0,99}$/.test(s);
+const countOK = (v) => Number.isSafeInteger(v) && v >= 0;
+const sectorIDs = new Set();
+const names = new Set();
+for (const s of d.sectors) {
+  if (
+    !s ||
+    !slugOK(s.id) ||
+    sectorIDs.has(s.id) ||
+    typeof s.en !== "string" ||
+    typeof s.pt !== "string" ||
+    !/^#[a-fA-F0-9]{6}$/.test(s.color) ||
+    !Array.isArray(s.pos) ||
+    s.pos.length !== 3 ||
+    !s.pos.every(Number.isFinite) ||
+    !Array.isArray(s.projects)
+  )
+    throw Error("Invalid public sector");
+  sectorIDs.add(s.id);
+  for (const p of s.projects) {
+    if (
+      !p ||
+      !slugOK(p.slug) ||
+      names.has(p.slug) ||
+      typeof p.title !== "string" ||
+      ![p.stars, p.forks, p.open_items].every(countOK)
+    )
+      throw Error("Invalid public project");
+    names.add(p.slug);
+  }
+}
 if (
-  [...names].some((s) => !/^[A-Za-z0-9_.-]{1,100}$/.test(s)) ||
+  !Array.isArray(d.featured) ||
   d.featured.some((s) => !names.has(s)) ||
-  Object.values(d.totals).some((v) => !Number.isSafeInteger(v) || v < 0)
+  new Set(d.featured).size !== d.featured.length ||
+  !d.totals ||
+  ![
+    d.totals.public_repositories,
+    d.totals.active_originals,
+    d.totals.stars,
+    d.totals.forks,
+    d.totals.open_items,
+    d.totals.followers,
+  ].every(countOK) ||
+  !Object.values(d.totals).every(countOK)
 )
   throw Error("Invalid public data");
 if (d.core_status !== undefined && d.core_status !== null) {

@@ -31,3 +31,5 @@ All six active CI workflows passed at `c7912df` (dependency audit, native tests,
 Security follow-up: CodeQL check reported two high severity DOM text reinterpretation alerts (19 and 20) despite a successful workflow job. Harden literal text rendering, restrict generated links and validate image slugs; browser smoke exercises a hostile label in the actual Universe. Do not merge until the new CodeQL check itself is green.
 
 Maintenance: #7 and #9 merged; CodeQL, browser, dependency inventory and tests passed. Scorecard improved 5.7 to 6.5, token permissions 0 to 10. Upgrade CodeQL init/analyze to the exact v4.39.3 commit already used for SARIF, and refresh the Core pilot pin; verify fresh PR and main runs. Preserve public renderer and catalog.
+
+Snapshot hardening: reject duplicate and non-string project identifiers, duplicate sectors, invalid positions/colors, invalid counts and repeated featured entries before creating output. Ten deterministic hostile mutations plus existing browser and escaping tests. This is bounded mutation coverage, not continuous coverage-guided fuzzing.
