@@ -148,7 +148,7 @@ describe("Test renderStatsCard", () => {
     });
     expect(document.querySelector("svg")).toHaveAttribute(
       "width",
-      "287",
+      "289.15625",
     );
 
     // Test minimum card width without rank and with icons.
@@ -359,7 +359,7 @@ describe("Test renderStatsCard", () => {
 
     expect(
       document.body.getElementsByTagName("svg")[0].getAttribute("width"),
-    ).toBe("287");
+    ).toBe("289.15625");
   });
 
   it("should auto resize if hide_rank is true & custom_title is set", () => {

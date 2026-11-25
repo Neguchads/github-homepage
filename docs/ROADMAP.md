@@ -9,3 +9,5 @@
 | Public API deployment | Not approved | Security review, token boundary and explicit release decision |
 
 Do not treat implementation as validated production readiness. Update status with actual evidence.
+
+Dependency audit: triage the npm advisory report, including the critical finding, before public API deployment. Keep Scorecard on the default branch per upstream guidance; PR CodeQL and NAVI/native gates remain.
