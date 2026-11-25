@@ -110,7 +110,7 @@
           "Codex Universal Config"
         ],
         [
-          "github-homepage",
+          "navi-githomepage",
           "GitHub Homepage"
         ],
         [
@@ -127,11 +127,11 @@
   "integrations": [
     {
       "source": "navi-graphify",
-      "target": "github-homepage",
+      "target": "navi-githomepage",
       "kind": "catalog-provider"
     },
     {
-      "source": "github-homepage",
+      "source": "navi-githomepage",
       "target": "Neguchads",
       "kind": "visualization-provider"
     },
