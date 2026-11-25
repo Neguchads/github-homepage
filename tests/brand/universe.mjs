@@ -113,6 +113,34 @@ test("public universe bundle and SVG", () => {
         .core_status.run_id,
       123,
     );
+    const baseline = JSON.parse(fs.readFileSync(s, "utf8"));
+    const mutations = [
+      (d) => (d.sectors[0].projects[0].slug = "../escape"),
+      (d) => (d.sectors[0].projects[0].slug = 42),
+      (d) => (d.sectors[0].projects[0].slug = "."),
+      (d) => d.sectors[1].projects.push(d.sectors[0].projects[0]),
+      (d) => (d.sectors[1].id = d.sectors[0].id),
+      (d) => (d.sectors[0].color = "url(https://example.invalid/x)"),
+      (d) => (d.sectors[0].pos = [1, 2]),
+      (d) => (d.sectors[0].projects[0].stars = -1),
+      (d) => (d.featured = ["test", "test"]),
+      (d) => delete d.totals.followers,
+    ];
+    for (const mutate of mutations) {
+      const candidate = structuredClone(baseline);
+      mutate(candidate);
+      fs.writeFileSync(s, JSON.stringify(candidate));
+      const rejected = path.join(root, "rejected");
+      assert.throws(() =>
+        execFileSync(
+          process.execPath,
+          ["scripts/build-universe.mjs", s, a, p, rejected],
+          { stdio: "ignore" },
+        ),
+      );
+      assert.ok(!fs.existsSync(rejected));
+    }
+    fs.writeFileSync(s, JSON.stringify(baseline));
     const invalid = JSON.parse(fs.readFileSync(s, "utf8"));
     invalid.core_status.private_log = "forbidden";
     fs.writeFileSync(s, JSON.stringify(invalid));
