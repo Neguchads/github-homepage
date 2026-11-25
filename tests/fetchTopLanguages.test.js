@@ -64,7 +64,7 @@ describe("FetchTopLanguages", () => {
   it("should fetch correct language data while using the new calculation", async () => {
     mock.onPost("https://api.github.com/graphql").reply(200, data_langs);
 
-    let repo = await fetchTopLanguages("ishandutta2007", [], 0.5, 0.5);
+    let repo = await fetchTopLanguages("navi-fixture", [], 0.5, 0.5);
     expect(repo).toStrictEqual({
       HTML: {
         color: "#0f0",
@@ -84,7 +84,7 @@ describe("FetchTopLanguages", () => {
   it("should fetch correct language data while excluding the 'test-repo-1' repository", async () => {
     mock.onPost("https://api.github.com/graphql").reply(200, data_langs);
 
-    let repo = await fetchTopLanguages("ishandutta2007", ["test-repo-1"]);
+    let repo = await fetchTopLanguages("navi-fixture", ["test-repo-1"]);
     expect(repo).toStrictEqual({
       HTML: {
         color: "#0f0",
@@ -104,7 +104,7 @@ describe("FetchTopLanguages", () => {
   it("should fetch correct language data while using the old calculation", async () => {
     mock.onPost("https://api.github.com/graphql").reply(200, data_langs);
 
-    let repo = await fetchTopLanguages("ishandutta2007", [], 1, 0);
+    let repo = await fetchTopLanguages("navi-fixture", [], 1, 0);
     expect(repo).toStrictEqual({
       HTML: {
         color: "#0f0",
@@ -124,7 +124,7 @@ describe("FetchTopLanguages", () => {
   it("should rank languages by the number of repositories they appear in", async () => {
     mock.onPost("https://api.github.com/graphql").reply(200, data_langs);
 
-    let repo = await fetchTopLanguages("ishandutta2007", [], 0, 1);
+    let repo = await fetchTopLanguages("navi-fixture", [], 0, 1);
     expect(repo).toStrictEqual({
       HTML: {
         color: "#0f0",
@@ -144,7 +144,7 @@ describe("FetchTopLanguages", () => {
   it("should throw specific error when user not found", async () => {
     mock.onPost("https://api.github.com/graphql").reply(200, error);
 
-    await expect(fetchTopLanguages("ishandutta2007")).rejects.toThrow(
+    await expect(fetchTopLanguages("navi-fixture")).rejects.toThrow(
       "Could not resolve to a User with the login of 'noname'.",
     );
   });
@@ -154,7 +154,7 @@ describe("FetchTopLanguages", () => {
       errors: [{ message: "Some test GraphQL error" }],
     });
 
-    await expect(fetchTopLanguages("ishandutta2007")).rejects.toThrow(
+    await expect(fetchTopLanguages("navi-fixture")).rejects.toThrow(
       "Some test GraphQL error",
     );
   });
@@ -164,7 +164,7 @@ describe("FetchTopLanguages", () => {
       errors: [{ type: "TEST" }],
     });
 
-    await expect(fetchTopLanguages("ishandutta2007")).rejects.toThrow(
+    await expect(fetchTopLanguages("navi-fixture")).rejects.toThrow(
       "Something went while trying to retrieve the language data using the GraphQL API.",
     );
   });
