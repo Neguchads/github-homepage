@@ -25,7 +25,7 @@ NAVI GitHub Homepage is the open-source visual and publishing layer of the Neguc
 
 ![Engineering ecosystem](docs/explore/ecosystem.en.svg)
 
-[Brand guide](docs/neguchads/README.md) · [Offline explorer](docs/explore/README.md) · [Universe renderer](docs/universe/README.md)
+[Brand guide](docs/neguchads/README.md) · [Offline explorer](docs/explore/README.md) · [Download standalone HTML](https://raw.githubusercontent.com/Neguchads/navi-githomepage/main/docs/explore/index.html) · [Universe renderer](docs/universe/README.md)
 
 The samples are checked-in assets, not live telemetry. Use `neguchads` or `neguchads_light` for the NAVI palette; existing theme names and API routes remain compatible.
 

@@ -23,3 +23,7 @@ Repository rename: canonical URLs, package name and project manifest now use `na
 ## Rename verification
 
 Commit `f91874667d18a0e201cb0d21c055289ec01f3c15`: npm audit all and production both zero, 246 Jest tests, 7 snapshots, 2 benchmarks, 9 native brand tests, ESLint, Prettier, renderer and CodeQL all passed. The next revision removes the remaining legacy Setup Node action, adds an offline real-browser gate and validates canonical navigation URLs in the concurrently synchronized 15-project catalog. Other ecosystem PRs remain separate. Main Scorecard and deployment validation remain pending.
+
+## Base synchronization
+
+All six active CI workflows passed at `c7912df` (dependency audit, native tests, NEF, theme, browser smoke and CodeQL). Main advanced in PR #8 to `2d76de8`; its canonical URLs and manifest are already included. The catalog's newer reviewed Graphify candidate was checked for exact JSON equivalence; it supersedes the historical normalization mapping. Retain the new standalone download link, refreshed 15-project catalog and cosmic integration. Merge main into the PR branch without a force push. Review final CI and upstream release pins before production publication.

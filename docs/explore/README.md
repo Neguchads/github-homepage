@@ -19,7 +19,7 @@ The scene is a conceptual map, not a quantitative activity visualization. Node s
 
 ## Verification
 
-Run `node --test tests/brand/engineering-universe.mjs` from the repository root. Tests cover offline initialization, language and station navigation, projection, and the explicit public link list. Browser/GPU visual performance still needs manual testing.
+Run `node --test tests/brand/engineering-universe.mjs` from the repository root. Tests cover offline initialization, language and station navigation, projection, and the explicit public link list. Real Chrome offline desktop and mobile smoke passed 15 checks at c7912df; manual visual performance review remains pending.
 
 See [credits and license](../../CREDITS.md) for inspiration and provenance.
 
