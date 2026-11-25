@@ -21,3 +21,7 @@ https://YOUR_DEPLOYMENT/api/top-langs?username=Neguchads&theme=neguchads_light&l
 ```
 
 For deployment, import this repository into a reviewed Vercel project using the existing vercel.json. Store PAT_1 only in server-side environment configuration; use credentials restricted to public data. Never use a token with private repository access on a public instance. Review status routes and WakaTime outbound domain handling before exposing the API. No public instance is provisioned or endorsed here. The static explorer works without API tokens. Cache and error behavior are defined in the handlers; do not disable safeguards casually.
+
+### WakaTime destination policy
+
+Only the official HTTPS origin `wakatime.com` is supported. The optional legacy `api_domain` parameter is accepted only for that host (optional trailing slash). Custom instances require a separately reviewed server-side adapter; arbitrary caller-selected destinations are rejected. Redirects are disabled, request time is limited to 10 seconds and response size to 2 MiB.

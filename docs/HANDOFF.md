@@ -11,3 +11,7 @@ Rollback: revert migration commit(s) or close the PR before merge. No force push
 ## CI follow-up (2026-11-25)
 
 PR #7 initial head: `0da9f71353d1634bd978ee9dec093b758a16587e`. NAVI pilot and CodeQL passed; native Jest: 220/222 passed, 7/7 snapshots passed; brand rendering: 73/75 passed. Both failures were stale width assertions after the synthetic fixture name changed. Corrected two assertions using the logged deterministic output; no renderer logic changed. Scorecard v2.3.1 failed to pull its old GCR image; updated to reviewed v2.6.0 (GHCR), following the upstream default-branch-only workflow schedule. No branch protection changes or bypasses. Recheck all PR jobs before merge, then verify Scorecard on main. npm ci also reported 28 dependency vulnerabilities (1 critical, 13 high, 12 moderate, 2 low); triage production versus dev scope before deployment. Browser smoke remains pending.
+
+## Dependency remediation
+
+Initial inventory: 28 flagged package entries, 3 production (Axios, form-data, follow-redirects) and 25 development-only. Remove unused dependencies of retired upstream automation, regenerate the lockfile via npm without force, and require new audit and test evidence. WakaTime restricts outbound requests to the official host; this deliberately retires caller-selected custom domains. Formatting is applied to source files; generated explorer HTML remains reproducibility-checked. No deployment is authorized.

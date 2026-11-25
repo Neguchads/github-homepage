@@ -1,0 +1,78 @@
+name: NAVI remediation candidate
+on:
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  candidate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+        with:
+          node-version: "22"
+      - name: Resolve compatible dependency fixes
+        run: |
+          npm install --package-lock-only --lockfile-version=2 --ignore-scripts
+          npm audit fix --package-lock-only --lockfile-version=2 --ignore-scripts || true
+          npm ci --ignore-scripts
+      - name: Format and regenerate
+        run: |
+          npm run format
+          node scripts/build-portfolio.mjs
+      - name: Emit reviewable candidate delta
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from "node:fs";
+          import { execFileSync } from "node:child_process";
+          const git = (...args) => execFileSync("git", args, {encoding:"utf8"});
+          const changed = git("diff","--name-only","-z").split("\0").filter(Boolean);
+          for (const path of changed) {
+            if (path === ".github/workflows/remediation-candidate.yml") continue;
+            const content = fs.readFileSync(path,"utf8");
+            let payload = content;
+            let kind = "full";
+            if (path === "package-lock.json") {
+              kind = "lock-delta";
+              const before = JSON.parse(git("show","HEAD:package-lock.json"));
+              const after = JSON.parse(content);
+              const changes = {};
+              const keys = {};
+              for (const section of ["packages","dependencies"]) {
+                const a = before[section] || {}, b = after[section] || {};
+                keys[section] = Object.keys(b);
+                changes[section] = Object.fromEntries(Object.entries(b).filter(([k,v])=>JSON.stringify(a[k])!==JSON.stringify(v)));
+              }
+              const top = Object.fromEntries(Object.entries(after).filter(([k])=>!["packages","dependencies"].includes(k)));
+              payload = JSON.stringify({top,order:Object.keys(after),keys,changes});
+            }
+            const sha = git("hash-object",path).trim();
+            const chunks = payload.match(/[\s\S]{1,4000}/g) || [""];
+            for (let i=0;i<chunks.length;i++) console.log("NAVI_CANDIDATE:"+JSON.stringify({path,kind,sha,i,total:chunks.length,chunk:chunks[i]}));
+          }
+          NODE
+      - name: Test candidate
+        run: |
+          npm run test:brand
+          npm run verify:portfolio
+          npm test -- --runInBand
+          npm run lint
+          npm run bench
+          npm run format:check
+      - name: Audit candidate
+        if: always()
+        run: |
+          npm audit --json > /tmp/all.json || true
+          npm audit --omit=dev --json > /tmp/prod.json || true
+          node --input-type=module <<'NODE'
+          import fs from "node:fs";
+          for (const scope of ["all","prod"]) {
+            const a = JSON.parse(fs.readFileSync("/tmp/"+scope+".json","utf8"));
+            console.log("CANDIDATE_AUDIT:"+JSON.stringify({scope,counts:a.metadata?.vulnerabilities,remaining:Object.entries(a.vulnerabilities||{}).map(([name,v])=>({name,range:v.range,fix:v.fixAvailable,severity:v.severity}))}));
+            if (!a.metadata || a.metadata.vulnerabilities.total) process.exitCode=1;
+          }
+          NODE
