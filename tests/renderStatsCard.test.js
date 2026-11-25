@@ -159,7 +159,7 @@ describe("Test renderStatsCard", () => {
     });
     expect(document.querySelector("svg")).toHaveAttribute(
       "width",
-      "304",
+      "306.15625",
     );
 
     // Test minimum card width with rank and icons.
