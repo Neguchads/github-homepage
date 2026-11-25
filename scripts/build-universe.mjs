@@ -65,11 +65,17 @@ for (const slug of d.featured)
   );
 fs.writeFileSync(
   path.join(out, "abyss.html"),
-  read(path.join(abyss, "index.html")).replace('href="reference.html"', 'href="cosmic.html"'),
+  read(path.join(abyss, "index.html")).replace(
+    'href="reference.html"',
+    'href="cosmic.html"',
+  ),
 );
 const cosmic = read(path.join(abyss, "reference.html"))
   .replace('href="index.html"', 'href="abyss.html"')
-  .replace('href="docs/CAPTURES.md"', 'href="https://github.com/Neguchads/navi-abyss/blob/main/docs/CAPTURES.md"')
+  .replace(
+    'href="docs/CAPTURES.md"',
+    'href="https://github.com/Neguchads/navi-abyss/blob/main/docs/CAPTURES.md"',
+  )
   .replace('href="LICENSE"', 'href="ABYSS-LICENSE.txt"');
 fs.writeFileSync(path.join(out, "cosmic.html"), cosmic);
 fs.copyFileSync(
