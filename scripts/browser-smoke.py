@@ -145,7 +145,7 @@ with tempfile.TemporaryDirectory() as temp:
                              "pos": [1, 0, 1], "projects": [{"slug": "test", "title": marker,
                              "language": "C", "stars": 0, "forks": 0, "open_items": 0}]}],
                 "featured": [], "integrations": [], "structural": {}, "languages": {},
-                "history": [], "core_status": None,
+                "history": [], "core_status": None, "sources": {"navi-core": "a" * 40},
             }
             template = (ROOT / "docs/universe/template.html").read_text(encoding="utf-8")
             source = (ROOT / "docs/universe/universe.js").read_text(encoding="utf-8")
@@ -158,6 +158,8 @@ with tempfile.TemporaryDirectory() as temp:
                   "Universe renders hostile label as literal text")
             check(execute("return !document.getElementById('injected') && !window.injected"),
                   "Universe hostile label does not become executable DOM")
+            check(execute("return !!document.querySelector(\'#sources a[href=\"https://github.com/Neguchads/navi-core/commit/" + "a" * 40 + "\"]\')"),
+                  "Universe retains canonical commit provenance links")
         finally:
             request("DELETE", prefix)
     finally:

@@ -206,7 +206,7 @@ for (const e of d.integrations) edge(e.source, e.target, "integration");
 function link(parent, label, url) {
   // Only fixed local fragments and canonical public GitHub repository paths.
   if (!/^#(?:analytics|featured)$/.test(url) &&
-      !/^https:\/\/github\.com\/Neguchads(?:\/[A-Za-z0-9_.-]{1,100})?$/.test(url))
+      !/^https:\/\/github\.com\/Neguchads(?:\/[A-Za-z0-9_-][A-Za-z0-9_.-]{0,99}(?:\/commit\/[a-f0-9]{40})?)?$/.test(url))
     return null;
   const a = el("a", label, parent);
   a.href = url;
