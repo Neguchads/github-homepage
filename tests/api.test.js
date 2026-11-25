@@ -322,8 +322,6 @@ describe("Test /api/", () => {
       renderError("Could not fetch total commits.", "Please try again later"),
     );
     // Received SVG output should not contain string "https://t.ly/seJTg"
-    expect(res.send.mock.calls[0][0]).not.toContain(
-      "https://t.ly/seJTg",
-    );
+    expect(res.send.mock.calls[0][0]).not.toContain("https://t.ly/seJTg");
   });
 });

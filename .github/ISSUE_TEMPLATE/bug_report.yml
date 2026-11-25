@@ -5,7 +5,8 @@ body:
   - type: textarea
     attributes:
       label: Problem and reproduction
-      description: Include revision, environment, and minimal steps. Never include secrets.
+      description:
+        Include revision, environment, and minimal steps. Never include secrets.
     validations:
       required: true
   - type: textarea

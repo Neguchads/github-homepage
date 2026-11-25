@@ -18,24 +18,43 @@ test("package identity, lockfile, support and deployment point to NAVI", () => {
   assert.equal(pkg.repository.url, pkg.homepage + ".git");
   assert.ok(pkg.private);
   assert.equal(pkg.license, "MIT");
-  assert.equal(JSON.parse(read("vercel.json")).redirects[0].destination, pkg.homepage);
+  assert.equal(
+    JSON.parse(read("vercel.json")).redirects[0].destination,
+    pkg.homepage,
+  );
   assert.match(read("LICENSE"), /Copyright \(c\) 2020/);
 });
 
 test("theme catalog matches actual registrations", () => {
-  const ids = [...read("themes/README.md").matchAll(/^- `([^`]+)`$/gm)].map((match) => match[1]);
+  const ids = [...read("themes/README.md").matchAll(/^- `([^`]+)`$/gm)].map(
+    (match) => match[1],
+  );
   assert.deepEqual(ids, Object.keys(themes));
 });
 
 test("retired identity appears only in credits and license notices", () => {
   const legacy = new RegExp(
-    ["ishan" + "dutta2007", "beautiful-github-" + "homepage", "hazru." + "anurag", "anurag" + "hazra"].join("|"),
+    [
+      "ishan" + "dutta2007",
+      "beautiful-github-" + "homepage",
+      "hazru." + "anurag",
+      "anurag" + "hazra",
+    ].join("|"),
     "i",
   );
-  const files = execFileSync("git", ["ls-files", "-z"], { cwd: root, encoding: "utf8" }).split("\0").filter(Boolean);
+  const files = execFileSync("git", ["ls-files", "-z"], {
+    cwd: root,
+    encoding: "utf8",
+  })
+    .split("\0")
+    .filter(Boolean);
   const hits = [];
   for (const file of files) {
-    if (["LICENSE", "CREDITS.md"].includes(file) || !/\.(?:md|js|mjs|ts|json|html|svg|yml|yaml|toml|sh|py|snap)$/i.test(file)) continue;
+    if (
+      ["LICENSE", "CREDITS.md"].includes(file) ||
+      !/\.(?:md|js|mjs|ts|json|html|svg|yml|yaml|toml|sh|py|snap)$/i.test(file)
+    )
+      continue;
     let text = read(file);
     if (file === "README.md") text = text.split("## Credits and license")[0];
     if (legacy.test(text)) hits.push(file);

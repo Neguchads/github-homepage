@@ -3,7 +3,7 @@ import { CustomError, MissingParamError } from "../common/utils.js";
 
 /**
  * Fetch public WakaTime statistics from the official service only.
- * @param {{username: string, api_domain?: string}} props Fetcher props.
+ * @param {{username: string, api_domain: string}} props Fetcher props.
  * @returns {Promise<WakaTimeData>} WakaTime data response.
  */
 const fetchWakatimeStats = async ({ username, api_domain } = {}) => {
@@ -20,10 +20,12 @@ const fetchWakatimeStats = async ({ username, api_domain } = {}) => {
   }
   if (
     api_domain !== undefined &&
-    (typeof api_domain !== "string" ||
-      !/^wakatime\.com\/?$/i.test(api_domain))
+    (typeof api_domain !== "string" || !/^wakatime\.com\/?$/i.test(api_domain))
   ) {
-    throw new CustomError("Unsupported WakaTime API domain", "INVALID_API_DOMAIN");
+    throw new CustomError(
+      "Unsupported WakaTime API domain",
+      "INVALID_API_DOMAIN",
+    );
   }
 
   const url = `https://wakatime.com/api/v1/users/${encodeURIComponent(username)}/stats?is_including_today=true`;

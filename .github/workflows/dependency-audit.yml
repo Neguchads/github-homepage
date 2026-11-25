@@ -61,3 +61,15 @@ jobs:
           name: npm-advisory-inventory
           path: audit/*.json
           retention-days: 14
+      - name: Enforce zero known dependency vulnerabilities
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from "node:fs";
+          for (const scope of ["all", "production"]) {
+            const report = JSON.parse(fs.readFileSync("audit/" + scope + ".json", "utf8"));
+            if (report.error || report.metadata?.vulnerabilities?.total !== 0) {
+              console.error("Dependency security gate failed: " + scope);
+              process.exitCode = 1;
+            }
+          }
+          NODE
