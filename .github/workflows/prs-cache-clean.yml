@@ -24,4 +24,4 @@ jobs:
         run: |
           set -euo pipefail
           [[ "$PR_NUMBER" =~ ^[0-9]+$ ]]
-          gh cache delete --all --ref "refs/pull/$PR_NUMBER/merge" --repo "$REPO"
+          gh cache delete --all --succeed-on-no-caches --ref "refs/pull/$PR_NUMBER/merge" --repo "$REPO"
