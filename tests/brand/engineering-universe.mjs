@@ -66,7 +66,7 @@ test("offline page loads with no graphics context and retains project navigation
     document.getElementById("detail-title").textContent,
     "Developer tools",
   );
-  assert.equal(document.getElementById("projects").children.length, 5);
+  assert.equal(document.getElementById("projects").children.length, 7);
   assert.equal(vm.runInContext("moving", ctx), false);
   document.getElementById("language").listeners.click();
   assert.equal(document.documentElement.lang, "pt-BR");
@@ -106,9 +106,11 @@ test("projection is finite and centered, quality and privacy boundaries are expl
       "favorite-manager",
       "spec-to-proof",
       "codex-config-universal",
-      "github-homepage",
+      "navi-githomepage",
       "navi-graphify",
       "Neguchads",
+      "navi-abyss",
+      "navi-core",
     ].sort(),
   );
 });

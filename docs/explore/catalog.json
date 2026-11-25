@@ -110,8 +110,8 @@
           "Codex Universal Config"
         ],
         [
-          "github-homepage",
-          "GitHub Homepage"
+          "navi-githomepage",
+          "NAVI GitHub Homepage"
         ],
         [
           "navi-graphify",
@@ -120,6 +120,14 @@
         [
           "Neguchads",
           "Neguchads Profile"
+        ],
+        [
+          "navi-abyss",
+          "NAVI Abyss"
+        ],
+        [
+          "navi-core",
+          "NAVI Core"
         ]
       ]
     }
@@ -127,11 +135,11 @@
   "integrations": [
     {
       "source": "navi-graphify",
-      "target": "github-homepage",
+      "target": "navi-githomepage",
       "kind": "catalog-provider"
     },
     {
-      "source": "github-homepage",
+      "source": "navi-githomepage",
       "target": "Neguchads",
       "kind": "visualization-provider"
     },
@@ -139,6 +147,21 @@
       "source": "Neguchads",
       "target": "navi-graphify",
       "kind": "project-discovery"
+    },
+    {
+      "source": "navi-abyss",
+      "target": "navi-githomepage",
+      "kind": "immersive-theme-provider"
+    },
+    {
+      "source": "Neguchads",
+      "target": "navi-abyss",
+      "kind": "public-experience-publisher"
+    },
+    {
+      "source": "navi-core",
+      "target": "navi-abyss",
+      "kind": "verification-provider"
     }
   ]
 }
