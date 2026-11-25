@@ -16,7 +16,7 @@ Example (replace YOUR_DEPLOYMENT with a verified instance URL):
 
 ```text
 https://YOUR_DEPLOYMENT/api?username=Neguchads&theme=neguchads&show_icons=true
-https://YOUR_DEPLOYMENT/api/pin?username=Neguchads&repo=github-homepage&theme=neguchads
+https://YOUR_DEPLOYMENT/api/pin?username=Neguchads&repo=navi-githomepage&theme=neguchads
 https://YOUR_DEPLOYMENT/api/top-langs?username=Neguchads&theme=neguchads_light&layout=donut
 ```
 

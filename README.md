@@ -2,7 +2,7 @@
   <img src="docs/neguchads/banner.svg" alt="Neguchads — Explore. Build. Verify." width="100%">
   <h1>NAVI // GitHub Homepage</h1>
   <p>Engineering identity, profile intelligence and interactive project discovery.</p>
-  <a href="https://github.com/Neguchads/github-homepage/actions"><img src="https://github.com/Neguchads/github-homepage/actions/workflows/navi-pilot.yml/badge.svg" alt="NAVI verification"></a>
+  <a href="https://github.com/Neguchads/navi-githomepage/actions"><img src="https://github.com/Neguchads/navi-githomepage/actions/workflows/navi-pilot.yml/badge.svg" alt="NAVI verification"></a>
   <a href="LICENSE">MIT</a> · <a href="docs/readme_pt-BR.md">Português</a> · <a href="https://github.com/Neguchads">Neguchads</a>
 </div>
 
@@ -14,7 +14,7 @@ NAVI GitHub Homepage is the open-source visual and publishing layer of the Neguc
 | --- | --- |
 | [NAVI Core](https://github.com/Neguchads/navi-core) | Agent-independent governance and verification |
 | [NAVI Graphify](https://github.com/Neguchads/navi-graphify) | Reviewed public graph snapshots |
-| [Navyv Abyss](https://github.com/Neguchads/navyv-abyss) | Optional immersive visual experience |
+| [NAVI Abyss](https://github.com/Neguchads/navi-abyss) | Optional immersive visual experience |
 | [Neguchads profile](https://github.com/Neguchads/Neguchads) | Public publishing surface |
 
 ## 02 / Visual system
@@ -54,7 +54,7 @@ Changes follow the [NAVI Engineering Framework](https://github.com/Neguchads/nav
 
 ## 06 / Contribute
 
-[Contributing](CONTRIBUTING.md) · [Security](SECURITY.md) · [Issues](https://github.com/Neguchads/github-homepage/issues) · [Changelog](CHANGELOG.md)
+[Contributing](CONTRIBUTING.md) · [Security](SECURITY.md) · [Issues](https://github.com/Neguchads/navi-githomepage/issues) · [Changelog](CHANGELOG.md)
 
 ---
 

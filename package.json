@@ -1,5 +1,5 @@
 {
-  "name": "navi-github-homepage",
+  "name": "navi-githomepage",
   "version": "1.0.0",
   "description": "NAVI-powered GitHub profile cards and engineering universe",
   "keywords": [
@@ -11,13 +11,13 @@
   ],
   "main": "src/index.js",
   "type": "module",
-  "homepage": "https://github.com/Neguchads/github-homepage",
+  "homepage": "https://github.com/Neguchads/navi-githomepage",
   "bugs": {
-    "url": "https://github.com/Neguchads/github-homepage/issues"
+    "url": "https://github.com/Neguchads/navi-githomepage/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Neguchads/github-homepage.git"
+    "url": "https://github.com/Neguchads/navi-githomepage.git"
   },
   "scripts": {
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage",

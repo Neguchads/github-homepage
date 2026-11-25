@@ -1,6 +1,6 @@
 # Contributing to NAVI GitHub Homepage
 
-Open an [issue](https://github.com/Neguchads/github-homepage/issues) for bugs and proposals. Use a scoped branch and describe the goal, acceptance criteria, changed boundaries, tests and rollback in the PR.
+Open an [issue](https://github.com/Neguchads/navi-githomepage/issues) for bugs and proposals. Use a scoped branch and describe the goal, acceptance criteria, changed boundaries, tests and rollback in the PR.
 
 ## Development
 

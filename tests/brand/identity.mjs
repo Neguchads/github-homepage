@@ -10,10 +10,10 @@ const read = (name) => readFileSync(new URL(name, root), "utf8");
 test("package identity, lockfile, support and deployment point to NAVI", () => {
   const pkg = JSON.parse(read("package.json"));
   const lock = JSON.parse(read("package-lock.json"));
-  assert.equal(pkg.name, "navi-github-homepage");
+  assert.equal(pkg.name, "navi-githomepage");
   assert.equal(pkg.name, lock.name);
   assert.equal(pkg.name, lock.packages[""].name);
-  assert.equal(pkg.homepage, "https://github.com/Neguchads/github-homepage");
+  assert.equal(pkg.homepage, "https://github.com/Neguchads/navi-githomepage");
   assert.equal(pkg.bugs.url, pkg.homepage + "/issues");
   assert.equal(pkg.repository.url, pkg.homepage + ".git");
   assert.ok(pkg.private);
