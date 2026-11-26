@@ -61,3 +61,5 @@ Changes follow the [NAVI Engineering Framework](https://github.com/Neguchads/nav
 ## Credits and license
 
 Maintained by Neguchads. Based on [Beautiful GitHub Homepage](https://github.com/ishandutta2007/beautiful-github-homepage) by Ishan Dutta and [GitHub Readme Stats](https://github.com/anuraghazra/github-readme-stats) by Anurag Hazra and contributors. Full [credits](CREDITS.md) and original [MIT license](LICENSE) are retained.
+
+[Open-source credits, provenance and distribution review](docs/OPEN_SOURCE_COMPLIANCE.md).
