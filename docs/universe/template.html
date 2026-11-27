@@ -3,28 +3,68 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Neguchads | NAVI Engineering Universe</title>
+    <title>NAVI-OS | Engineering Universe</title>
+    <meta
+      name="description"
+      content="Explore the public NAVI-OS projects, repository graph, and GitHub metrics."
+    />
     <style>
       /*THEME*/
+      .navi-hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+        gap: clamp(1rem, 4vw, 3rem);
+        align-items: center;
+        padding: clamp(1rem, 4vw, 2.5rem);
+        border: 1px solid var(--line);
+        border-radius: 1rem;
+        background: linear-gradient(140deg, #101d2a, #070d16);
+      }
+      .navi-hero h1 {
+        margin: 0;
+        color: var(--text);
+        font-size: clamp(2.5rem, 7vw, 5.25rem);
+        line-height: 1;
+        letter-spacing: -0.055em;
+      }
+      .navi-hero .hero-subtitle {
+        margin: 0.5rem 0 0;
+        color: var(--accent);
+        font-size: clamp(1rem, 2.5vw, 1.375rem);
+        font-weight: 650;
+      }
+      .navi-hero img {
+        height: auto;
+      }
+      @media (max-width: 760px) {
+        .navi-hero {
+          grid-template-columns: minmax(0, 1fr);
+        }
+      }
     </style>
   </head>
   <body>
     <main>
       <header>
-        <img
-          src="assets/banner.svg"
-          alt="Neguchads — Explore. Build. Verify."
-        />
-        <p class="eyebrow">NAVI / Engineering Universe</p>
-        <h1 data-pt="Inteligência de engenharia interconectada">
-          Interconnected engineering intelligence
-        </h1>
-        <p
-          data-pt="Explore projetos, tecnologias, relações e métricas públicas em um único universo."
-        >
-          Explore projects, technologies, relationships and public metrics in a
-          single universe.
-        </p>
+        <div class="navi-hero">
+          <div>
+            <h1>NAVI-OS</h1>
+            <p class="hero-subtitle" data-pt="Universo de engenharia">
+              Engineering Universe
+            </p>
+            <p
+              data-pt="Explore os projetos públicos, o grafo de repositórios e as métricas do GitHub."
+            >
+              Explore the public projects, repository graph, and GitHub metrics.
+            </p>
+          </div>
+          <img
+            src="assets/banner.svg"
+            width="1200"
+            height="320"
+            alt="Neguchads — Explore. Build. Verify."
+          />
+        </div>
         <div role="group" aria-label="Language / Idioma" class="controls">
           <button type="button" id="lang-en" lang="en" aria-pressed="true">
             EN</button
