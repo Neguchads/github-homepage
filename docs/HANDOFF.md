@@ -33,3 +33,7 @@ Security follow-up: CodeQL check reported two high severity DOM text reinterpret
 Maintenance: #7 and #9 merged; CodeQL, browser, dependency inventory and tests passed. Scorecard improved 5.7 to 6.5, token permissions 0 to 10. Upgrade CodeQL init/analyze to the exact v4.39.3 commit already used for SARIF, and refresh the Core pilot pin; verify fresh PR and main runs. Preserve public renderer and catalog.
 
 Snapshot hardening: reject duplicate and non-string project identifiers, duplicate sectors, invalid positions/colors, invalid counts and repeated featured entries before creating output. Ten deterministic hostile mutations plus existing browser and escaping tests. This is bounded mutation coverage, not continuous coverage-guided fuzzing.
+
+## NAVI-OS Universe homepage
+
+The reusable template gives NAVI-OS the primary heading and uses the existing metallic N and cyan banner supplied by the profile build. Template IDs, link destinations and build placeholders were checked against the baseline. Browser and native CI verification are pending. Review the renderer change before updating the pinned Homepage revision in the profile publication workflow.

@@ -11,3 +11,5 @@
 Do not treat implementation as validated production readiness. Update status with actual evidence.
 
 Dependency audit: 28 flagged package entries remediated; full and production audit both zero on f918746. The permanent gate rejects new known advisories. Public API deployment review remains mandatory. Keep Scorecard on the default branch per upstream guidance; PR CodeQL and NAVI/native gates remain.
+
+Universe homepage branding is in review. Verify the two-column header on desktop and its single-column layout on mobile before updating the profile publication pin.
